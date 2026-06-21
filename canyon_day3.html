@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day-3 페이지·자이언캐년·라스베가스·엘에이도착 | ACE TOUR 캐년투어</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:    #0a1628;
+    --card:  #0f1e35;
+    --card2: #13243e;
+    --border:#1e3356;
+    --text:  #e8f0fc;
+    --sub:   #7a9bc4;
+    --gold:  #f5c842;
+    --cyan:  #4fc8e8;
+    --rust:  #e8714a;
+    --green: #4ecb8d;
+    --navy:  #1B2A4A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:"Noto Sans KR",sans-serif;min-height:100vh;padding-bottom:40px;}
+
+  .header{background:linear-gradient(135deg,#0d1f3c,#1a3a6e);border-bottom:1px solid var(--border);padding:16px;}
+  .header-inner{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+  .brand{display:flex;align-items:center;gap:8px;}
+  .brand-icon{width:30px;height:30px;background:linear-gradient(135deg,var(--gold),#e8956a);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;}
+  .brand-text{font-family:"Poppins",sans-serif;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;}
+  .date-box{text-align:right;}
+  .date-box strong{font-family:"Poppins",sans-serif;font-size:15px;font-weight:700;color:var(--text);}
+  .date-box span{display:block;font-size:11px;color:var(--sub);}
+  .header-title{font-family:"Poppins",sans-serif;font-size:21px;font-weight:900;color:var(--text);letter-spacing:-0.5px;}
+  .header-title em{color:var(--gold);font-style:normal;}
+  .header-sub{font-size:12px;color:var(--sub);margin-top:3px;}
+
+  .wrap{padding:14px;}
+
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;}
+  .sl{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+  .sl::after{content:"";flex:1;height:1px;background:var(--border);}
+  .sl-gold{color:var(--gold);}
+  .sl-sky{color:var(--cyan);}
+  .sl-rust{color:var(--rust);}
+  .sl-green{color:var(--green);}
+  .sl-sand{color:#c8aa80;}
+
+  /* 날씨 4개 */
+  .weather-quad{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+  .wc{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:11px 8px;text-align:center;}
+  .wc-label{font-size:10.5px;color:var(--sub);margin-bottom:6px;font-weight:500;line-height:1.3;}
+  .wc-main{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:4px;}
+  .wc-temp{font-family:"Poppins",sans-serif;font-weight:700;font-size:26px;color:var(--text);line-height:1;}
+  .wc-temp sup{font-size:13px;vertical-align:super;}
+  .wc-desc{font-size:9.5px;color:var(--sub);line-height:1.6;margin-top:4px;}
+  .wc-alert{font-size:9.5px;color:var(--cyan);margin-top:2px;}
+
+  /* 일정 — 타임라인 통합형 */
+  .sch-item{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid var(--border);}
+  .sch-item:last-child{border-bottom:none;padding-bottom:0;}
+  .sch-time-badge{width:58px;flex-shrink:0;text-align:center;}
+  .sch-time-num{font-family:"Noto Sans KR",sans-serif;font-size:15px;font-weight:700;color:var(--gold);line-height:1.2;}
+  .sch-dot-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0;padding-top:4px;}
+  .sch-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+  .sch-icon{width:36px;height:36px;background:var(--card2);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+  .sch-info{flex:1;min-width:0;}
+  .sch-title{font-size:11px;font-weight:700;color:var(--sub);margin-bottom:4px;letter-spacing:.8px;font-family:"Noto Sans KR",sans-serif;}
+  .sch-detail{font-size:13.5px;color:var(--text);line-height:1.7;font-family:"Noto Sans KR",sans-serif;font-weight:700;}
+  .sch-detail b{color:var(--gold);}
+  .sch-sub{font-size:12px;color:#c8d8f0;margin-top:5px;line-height:1.6;font-family:"Noto Sans KR",sans-serif;font-weight:400;}
+
+  /* 참고사항 */
+  .note-item{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);}
+  .note-item:last-child{border-bottom:none;}
+  .note-dot{color:var(--rust);font-size:14px;line-height:1.6;flex-shrink:0;}
+  .note-text{font-size:13px;color:#e8f0fc;line-height:1.9;font-family:"Noto Sans KR",sans-serif;}
+  .note-highlight{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.35);border-radius:10px;padding:12px 14px;margin-top:10px;}
+  .note-highlight-text{font-size:13px;color:#f0d9a8;line-height:1.85;font-family:"Noto Sans KR",sans-serif;}
+  .note-highlight-text b{color:var(--gold);}
+
+  .guide-text{font-size:13px;line-height:2.0;color:var(--text);}
+  .guide-text b{color:var(--cyan);}
+
+  .closing-card{background:linear-gradient(135deg,rgba(30,50,90,0.9),rgba(15,30,60,0.95));border-color:rgba(245,200,66,0.15);text-align:center;padding:22px;}
+  .closing-text{font-weight:900;font-size:20px;color:var(--text);}
+  .closing-name{font-size:12px;color:var(--sub);margin-top:8px;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-icon">✈</div>
+      <span class="brand-text">ACE TOUR</span>
+    </div>
+    <div class="date-box">
+      <strong>6월 21일 (일)</strong>
+      <span>2026</span>
+    </div>
+  </div>
+  <div class="header-title">Day <em>3</em> · 페이지·자이언캐년·라스베가스·엘에이도착</div>
+  <div class="header-sub">2박 3일 캐년투어 · 마지막 일정의 날</div>
+</div>
+
+<div class="wrap">
+
+  <!-- 날씨 4개 -->
+  <div class="card">
+    <div class="sl sl-sky">🌤 내일 현지 날씨</div>
+    <div class="weather-quad">
+
+      <!-- 페이지 -->
+      <div class="wc">
+        <div class="wc-label">🏜 페이지, AZ<br>(앤텔럽·홀슈밴드)</div>
+        <div class="wc-main">
+          <svg width="26" height="26" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <defs><radialGradient id="sg_pg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffcc44"/><stop offset="100%" stop-color="#e8820a"/></radialGradient></defs>
+            <g stroke="#e8820a" stroke-width="2.5" stroke-linecap="round" opacity="0.7">
+              <line x1="40" y1="6" x2="40" y2="0"/><line x1="60" y1="12" x2="64" y2="8"/><line x1="68" y1="30" x2="74" y2="30"/>
+              <line x1="12" y1="12" x2="8" y2="8"/><line x1="4" y1="30" x2="0" y2="30"/><line x1="40" y1="62" x2="40" y2="68"/>
+            </g>
+            <circle cx="40" cy="32" r="18" fill="url(#sg_pg)" opacity="0.95"/>
+          </svg>
+          <div class="wc-temp">36<sup>°</sup></div>
+        </div>
+        <div class="wc-desc">맑고 건조 · 최저 22°C</div>
+        <div class="wc-alert">🔥 폭염 · 그늘 없음 주의</div>
+      </div>
+
+      <!-- 자이언캐년 -->
+      <div class="wc">
+        <div class="wc-label">🏔 자이언캐년<br>(Utah)</div>
+        <div class="wc-main">
+          <svg width="26" height="26" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <defs><radialGradient id="sg_zc" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffe066"/><stop offset="100%" stop-color="#f5a020"/></radialGradient></defs>
+            <g stroke="#f5c030" stroke-width="2.5" stroke-linecap="round" opacity="0.65">
+              <line x1="40" y1="8" x2="40" y2="2"/><line x1="58" y1="14" x2="62" y2="10"/><line x1="66" y1="32" x2="72" y2="32"/>
+              <line x1="14" y1="14" x2="10" y2="10"/><line x1="6" y1="32" x2="0" y2="32"/>
+            </g>
+            <circle cx="40" cy="34" r="16" fill="url(#sg_zc)" opacity="0.95"/>
+          </svg>
+          <div class="wc-temp">33<sup>°</sup></div>
+        </div>
+        <div class="wc-desc">맑음 · 최저 19°C</div>
+        <div class="wc-alert">☀️ 아름다운 절경 · 자외선 강함</div>
+      </div>
+
+      <!-- 라스베가스 -->
+      <div class="wc">
+        <div class="wc-label">🎰 라스베가스<br>(가이드 동행 종료)</div>
+        <div class="wc-main">
+          <svg width="26" height="26" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <defs><radialGradient id="sg_lv3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffaa00"/><stop offset="100%" stop-color="#e85500"/></radialGradient></defs>
+            <g stroke="#e85500" stroke-width="2.5" stroke-linecap="round" opacity="0.75">
+              <line x1="40" y1="6" x2="40" y2="0"/><line x1="62" y1="12" x2="66" y2="8"/><line x1="70" y1="32" x2="76" y2="32"/>
+              <line x1="10" y1="12" x2="6" y2="8"/><line x1="2" y1="32" x2="8" y2="32"/>
+              <line x1="40" y1="64" x2="40" y2="70"/><line x1="62" y1="56" x2="66" y2="60"/><line x1="10" y1="56" x2="6" y2="60"/>
+            </g>
+            <circle cx="40" cy="34" r="20" fill="url(#sg_lv3)" opacity="0.95"/>
+          </svg>
+          <div class="wc-temp">40<sup>°</sup></div>
+        </div>
+        <div class="wc-desc">맑고 건조 · 최저 27°C</div>
+        <div class="wc-alert">🔥 폭염 · 수분 보충 필수</div>
+      </div>
+
+      <!-- LA -->
+      <div class="wc">
+        <div class="wc-label">🌴 로스앤젤레스<br>(셔틀 최종 도착)</div>
+        <div class="wc-main">
+          <svg width="26" height="26" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <defs><radialGradient id="sg_la3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffe066"/><stop offset="100%" stop-color="#f5a020"/></radialGradient></defs>
+            <g stroke="#f5c030" stroke-width="2.5" stroke-linecap="round" opacity="0.65">
+              <line x1="40" y1="8" x2="40" y2="2"/><line x1="58" y1="14" x2="62" y2="10"/><line x1="66" y1="32" x2="72" y2="32"/>
+              <line x1="14" y1="14" x2="10" y2="10"/><line x1="6" y1="32" x2="0" y2="32"/>
+            </g>
+            <circle cx="40" cy="34" r="16" fill="url(#sg_la3)" opacity="0.95"/>
+          </svg>
+          <div class="wc-temp">23<sup>°</sup></div>
+        </div>
+        <div class="wc-desc">맑음 · 최저 15°C</div>
+        <div class="wc-alert">🌊 바닷바람 · 쾌적</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 일정 안내 (통합형) -->
+  <div class="card">
+    <div class="sl sl-rust">🗓 Day 3 일정 안내</div>
+
+    <div class="sch-item">
+      <div class="sch-time-badge"><div class="sch-time-num">06:30</div></div>
+      <div class="sch-icon">🍳</div>
+      <div class="sch-info">
+        <div class="sch-title">아침</div>
+        <div class="sch-detail">아침 식사 시작</div>
+        <div class="sch-sub">📍 출발 전 든든하게 챙겨 드세요</div>
+      </div>
+    </div>
+
+    <div class="sch-item">
+      <div class="sch-time-badge"><div class="sch-time-num">07:30</div></div>
+      <div class="sch-icon">🚗</div>
+      <div class="sch-info">
+        <div class="sch-title">출발</div>
+        <div class="sch-detail">정각 출발 · 늦으면 안 됩니다</div>
+        <div class="sch-sub">📍 오늘 일정이 타이트하니 절대 늦지 말아주세요</div>
+      </div>
+    </div>
+
+    <div class="sch-item">
+      <div class="sch-time-badge"><div class="sch-time-num">08:15</div></div>
+      <div class="sch-icon">🏜</div>
+      <div class="sch-info">
+        <div class="sch-title">메인 일정</div>
+        <div class="sch-detail">앤텔럽캐년 도착</div>
+        <div class="sch-sub">📍 신비로운 빛줄기 협곡 — 사진 촬영 명소</div>
+      </div>
+    </div>
+
+    <div class="sch-item">
+      <div class="sch-time-badge"><div class="sch-time-num">10:00</div></div>
+      <div class="sch-icon">🌅</div>
+      <div class="sch-info">
+        <div class="sch-title">메인 일정</div>
+        <div class="sch-detail">홀슈밴드 도착</div>
+        <div class="sch-sub">📍 콜로라도강 말발굽 절경 — 도보 이동 구간 있음</div>
+      </div>
+    </div>
+
+    <div class="sch-item">
+      <div class="sch-time-badge"><div class="sch-time-num">13:00</div></div>
+      <div class="sch-icon">🥪</div>
+      <div class="sch-info">
+        <div class="sch-title">점심</div>
+        <div class="sch-detail">서브웨이</div>
+        <div class="sch-sub">📍 자이언캐년 이동 전 식사</div>
+      </div>
+    </div>
+
+    <div class="sch-item">
+      <div class="sch-time-badge"><div class="sch-time-num">15:00</div></div>
+      <div class="sch-icon">🏔</div>
+      <div class="sch-info">
+        <div class="sch-title">메인 일정</div>
+        <div class="sch-detail">자이언캐년 도착</div>
+        <div class="sch-sub">📍 시간과 자연이 만든 아름다운 절경 · 이번 투어의 마지막 명소</div>
+      </div>
+    </div>
+
+    <div class="sch-item">
+      <div class="sch-time-badge"><div class="sch-time-num">18:00</div></div>
+      <div class="sch-icon">🎰</div>
+      <div class="sch-info">
+        <div class="sch-title">가이드 동행 종료</div>
+        <div class="sch-detail">라스베가스 도착</div>
+        <div class="sch-sub">🌙 이후 셔틀로 환승하여 엘에이로 이동 (하단 참고사항 확인)</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 가이드 공지 -->
+  <div class="card guide-card">
+    <div class="sl sl-gold">📢 가이드 공지</div>
+    <div class="guide-text">
+      안녕하세요! 내일은 <b>2박 3일 캐년투어의 마지막 날</b>입니다.<br><br>
+      앤텔럽캐년의 신비로운 빛줄기, 홀슈밴드의 말발굽 절경,<br>
+      그리고 자이언캐년까지 — <b>오늘 하루에 핵심 명소를 모두</b> 둘러봅니다.<br><br>
+      <b>오전 7시 30분 정각 출발</b>이니 절대 늦지 않도록 준비해 주세요!<br>
+      페이지·라스베가스 모두 <b>35°C 이상 폭염</b>이 예상되니<br>
+      <b>선크림 · 선글라스 · 모자</b>는 꼭 챙겨 주세요 ☀️<br><br>
+      앤텔럽캐년·홀슈밴드는 그늘이 거의 없는 사막 지형이라<br>
+      물을 충분히 준비해 주시고, 도보 이동이 있으니<br>
+      <b>운동화 착용</b>도 잊지 마세요 👟<br><br>
+      라스베가스 도착 후에는 저와는 동행이 마무리되고,<br>
+      엘에이로 가는 <b>저희 회사 셔틀</b>로 환승하시게 됩니다.<br>
+      자세한 내용은 내일 다시 업데이트 드릴게요 🚐<br><br>
+      마지막 날까지 함께 멋진 추억 만들어 봅시다 🏜️✨
+    </div>
+  </div>
+
+  <!-- closing -->
+  <div class="card closing-card">
+    <div class="closing-text">함께해 주셔서 감사합니다! 🙏✨</div>
+    <div class="closing-name">제이팀장 올림</div>
+  </div>
+
+</div>
+</body>
+</html>
